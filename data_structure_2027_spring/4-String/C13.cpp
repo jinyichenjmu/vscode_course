@@ -31,9 +31,9 @@ bool StrAssign(SqString &s, const char text[])
     return true;
 }
 
-void GetNext(const SqString &t, int next[])
+void GetNext(const SqString &s, int next[])
 {
-    if(t.length == 0)
+    if(s.length == 0)
     {
         return;
     }
@@ -42,12 +42,12 @@ void GetNext(const SqString &t, int next[])
     int k = -1;
     next[0] = -1;
 
-    while(j < t.length - 1)
+    while(j < s.length - 1)
     {
-        if(k == -1 || t.data[j] == t.data[k])
+        if(k == -1 || s.data[k] == s.data[j])
         {
-            j ++;
             k ++;
+            j ++;
             next[j] = k;
         }
         else
@@ -70,7 +70,7 @@ void GetNextval(const SqString &t, const int next[], int nextval[])
     {
         int k = next[j];
 
-        if(t.data[k] == t.data[j])
+        if(t.data[j] == t.data[k])
         {
             nextval[j] = nextval[k];
         }

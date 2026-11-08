@@ -72,7 +72,7 @@ int KMP(const SqString &s, const SqString &t)
 
     while(i < s.length && j < t.length)
     {
-        if(j == -1 || s.data[i] == t.data[j])
+        if(j == -1 || s.data[i] == t.data[j])          // 没有可继续比较的模式位置。
         {
             i ++;
             j ++;
@@ -80,6 +80,36 @@ int KMP(const SqString &s, const SqString &t)
         else
         {
             j = next[j];
+        }
+    }
+
+    if(j == t.length)
+    {
+        return i - j;
+    }
+    return -1;
+}
+
+int Match(const SqString &s, const SqString &t, const int jump[], int &compraisons)
+{
+    if(t.length == 0)
+    {
+        return 0;
+    }
+
+    int i = 0;      //目标串下标
+    int j = 0;      //模式串下标
+
+    while(i < s.length && j < t.length)
+    {
+        if(j == -1 || s.data[i] == t.data[j])
+        {
+            i ++;
+            j ++;
+        }
+        else
+        {
+            j = jump[j];
         }
     }
 
